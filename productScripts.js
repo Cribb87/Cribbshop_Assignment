@@ -1,8 +1,9 @@
-let prod = JSON.parse(localStorage.getItem("prod"));
-if (prod == null) {
-  prod = [];
+let prod = []
+
+let cart = JSON.parse(localStorage.getItem("cart"));
+if (cart == null) {
+  cart = [];
 }
-let cart = [];
 
 function renderCart() {
   const getProducts = JSON.parse(localStorage.getItem("cart"));
@@ -18,7 +19,7 @@ function renderCart() {
         <td><button type="button" class="btn btn-secondary" onclick="addProduct(${element.id})">+
         <button type="button" class="btn btn-default">${element.quantity}
         <button type="button" class="btn btn-secondary" onclick="removeProduct(${element.id})">-</td>
-        <td id="total${element.id}">${element.price.toFixed(2) * element.quantity} $</td> 
+        <td id="total${element.id}">${(element.price * element.quantity).toFixed(2)} $</td> 
     </tr>`;
   });
 }
@@ -65,28 +66,23 @@ function getProduct(id) {
 }
 
 function toCart(id) {
-  const adding = getProduct(id);
-  if (cart.length == 0) {
+  var adding = getProduct(id);
+  var test = false
+  cart.forEach(element => {
+    if (element.id == id){
+      test = true
+      adding = element
+    }
+  })
+  if (!test) {
     adding.quantity = 1;
     cart.push(adding);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
-    return
   } 
   else {
-    cart.forEach(element => {
-      if (element.id == id){
-      element.quantity += 1;
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-      return
+    console.log("test")
+    adding.quantity += 1
       }
-    })
-  }
-  adding.quantity = 1
-  cart.push(adding)
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart();
+  saveCart()
 }
 
 function addProduct(product) {
@@ -135,7 +131,7 @@ $("#placeOrder").click(function () {
 });
 
 function saveCart() {
-  localStorage.setItem("prod", JSON.stringify(prod));
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 $("#clear").click(function () {

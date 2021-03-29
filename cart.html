@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/bootstrap.css">
+    <title>Cribbshop</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Cribbshop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./store.html">Products</a>
+            </li>
+          </ul>
+            <div class="nav-item active">
+              <a class="nav-link" href="./cart.html">Cart
+                <span class="sr-only">(current)</span>
+              </a>
+            </div>
+          </div>
+    </nav> 
+    <br>
+        <h3>Your order</h3>
+  <table class="table table-hover">
+    <thead>        
+        <tr class="table-success">
+          <th scope="row">Product</th>
+          <th scope="row">Price</th>
+          <th scope="row">Quantity</th>
+          <th scope="row" id="total">Total price</th>
+        </tr>
+    </thead>  
+    <tbody id="productsInCart">
+      
+    </tbody>
+  </table>
+  <form id="myForm">
+    <fieldset>
+      
+      <button class="btn btn-secondary" id="clear"> Clear cart </button>
+      <br>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phonenumber</label>
+        <input type="text" class="form-control" id="phone" placeholder="Number">
+      </div>
+      <div class="form-group">
+        <label for="adress">Adress</label>
+        <input type="text" class="form-control" id="adress" placeholder="Adress">
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <button id="placeOrder" class="btn btn-success">Order</button>
+    </fieldset>
+  </form> 
+    <footer>
+      <br>
+        <h5>Contact:</h5>
+        <p>info@cribbshop.se</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="productScripts.js"></script>
+    <script>renderCart()</script>
+  
+</body>
+</html>
+

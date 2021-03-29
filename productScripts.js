@@ -11,8 +11,6 @@ function renderCart() {
   getProducts.forEach((element) => {
     document.getElementById("productsInCart").innerHTML +=
     `<tr class="table-default">
-        <td scope="row">
-        <img class="img-thumbnail-cart" src="${element.image}" alt="Random picture"
         <td scope="row">${element.title}</td>
         </td>
         <td scope="row">${element.price} $</td>

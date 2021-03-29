@@ -9,7 +9,7 @@ function renderCart() {
 
   getProducts.forEach((element) => {
     document.getElementById("productsInCart").innerHTML +=
-     `<tr class="table-default">
+    `<tr class="table-default">
         <td scope="row">
         <img class="img-thumbnail-cart" src="${element.image}" alt="Random picture"
         <td scope="row">${element.title}</td>
@@ -20,9 +20,7 @@ function renderCart() {
         <button type="button" class="btn btn-secondary" onclick="removeProduct(${element.id})">-</td>
         <td id="total${element.id}">${element.price.toFixed(2) * element.quantity} $</td> 
     </tr>`;
-    
   });
-  console.log(getProducts);
 }
 
 function getAllProducts() {
@@ -40,22 +38,17 @@ function getAllProducts() {
           quantity: 0,
         };
         prod.push(newProduct);
-        document.getElementById(
-          "products"
-        ).innerHTML += `<div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="card border-primary mb-3" style="max-width: 30rem;">
+        document.getElementById("products").innerHTML += 
+        `<div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card border-primary mb-3" style="max-width: 30rem;">
             <div class="card-header bg-success" > ${element.title}</div>
             <div class="card-body">
-                <h4 class="card-title" > ${element.category} </h4>
-                <img class="img-thumbnail" src="${
-                  element.image
-                }" alt="Random picture" />
-                <p class="card-text" > ${element.description} </p>
-                <h4 class="card-price" > ${element.price.toFixed(2)} $</h4>
-                <button class="btn btn-secondary" onclick="toCart(${
-                  element.id
-                })" > Add to cart </button>
-            </div>
+            <h4 class="card-title" > ${element.category} </h4>
+            <img class="img-thumbnail" src="${element.image}" alt="Random picture" />
+            <p class="card-text" > ${element.description} </p>
+            <h4 class="card-price" > ${element.price.toFixed(2)} $</h4>
+            <button class="btn btn-secondary" onclick="toCart(${element.id})" > Add to cart </button>
+          </div>
         </div>`;
       })
     );
@@ -77,18 +70,18 @@ function toCart(id) {
     adding.quantity = 1;
     cart.push(adding);
     localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-      return
+    renderCart();
+    return
   } 
   else {
-      cart.forEach(element => {
-          if (element.id == id){
-          element.quantity += 1;
-          localStorage.setItem("cart", JSON.stringify(cart));
-            renderCart();
-            return
-          }
-      })
+    cart.forEach(element => {
+      if (element.id == id){
+      element.quantity += 1;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+      return
+      }
+    })
   }
   adding.quantity = 1
   cart.push(adding)
@@ -108,12 +101,9 @@ function removeProduct(product) {
   window.location.reload();
   let cart = JSON.parse(localStorage.getItem("cart"));
   let removing = cart.find((element) => element.id == product);
-console.log("här")
-  console.log(removing)
     if (removing.quantity !== 0) {
-        console.log("här2")
-        removing.quantity += -1;
-        localStorage.setItem("cart", JSON.stringify(cart));
+      removing.quantity += -1;
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
   }
 
@@ -127,7 +117,6 @@ function totalPrice() {
     amount += price * quantity;
   });
   document.getElementById("total").innerHTML += amount;
-  console.log(amount);
 }
 
 $("#placeOrder").click(function () {
@@ -135,14 +124,11 @@ $("#placeOrder").click(function () {
   let phone = document.forms["myForm"]["phone"].value;
   let adress = document.forms["myForm"]["adress"].value;
   let email = document.forms["myForm"]["email"].value;
-  console.log(name);
-  console.log(phone);
-  console.log(adress);
-  console.log(email);
 
   if (name == "" || phone == "" || adress == "" || email == "") {
     alert("You need to fill in every field to place the order");
-  } else {
+  } 
+  else {
     alert("Thanks for shopping at Cribbshop, please come again");
     localStorage.clear();
   }

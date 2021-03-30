@@ -17,7 +17,7 @@ function renderCart() {
         <td><button type="button" class="btn btn-secondary" onclick="addProduct(${element.id})">+
         <button type="button" class="btn btn-default">${element.quantity}
         <button type="button" class="btn btn-secondary" onclick="removeProduct(${element.id})">-</td>
-        <td id="total${element.id}">${(element.price * element.quantity).toFixed(2)} $</td> 
+        <td id="${element.id}">${(element.price * element.quantity).toFixed(2)} $</td> 
     </tr>`;
   });
 }
@@ -65,19 +65,18 @@ function getProduct(id) {
 
 function toCart(id) {
   var adding = getProduct(id);
-  var test = false
+  var add = false
   cart.forEach(element => {
     if (element.id == id){
-      test = true
+      add = true
       adding = element
     }
   })
-  if (!test) {
+  if (!add) {
     adding.quantity = 1;
-    cart.push(adding);
+    cart.push(adding);  
   } 
   else {
-    console.log("test")
     adding.quantity += 1
       }
   saveCart()
@@ -88,7 +87,7 @@ function addProduct(product) {
   let add = JSON.parse(localStorage.getItem("cart"));
   let adding = add.find((element) => element.id == product);
   adding.quantity += 1;
-  localStorage.setItem("cart", JSON.stringify(add));
+  saveCart()
 }
 
 function removeProduct(product) {
@@ -97,21 +96,11 @@ function removeProduct(product) {
   let removing = cart.find((element) => element.id == product);
     if (removing.quantity !== 0) {
       removing.quantity += -1;
-      localStorage.setItem("cart", JSON.stringify(cart));
+      saveCart()
     }
   }
 
-function totalPrice() {
-  let prod = JSON.parse(localStorage.getItem("cart"));
-  let amount = 0;
 
-  prod.forEach((element) => {
-    let price = parseInt(element.price);
-    let quantity = parseInt(element.quantity);
-    amount += price * quantity;
-  });
-  document.getElementById("total").innerHTML += amount;
-}
 
 $("#placeOrder").click(function () {
   let name = document.forms["myForm"]["name"].value;

@@ -65,16 +65,16 @@ function getProduct(id) {
 
 function toCart(id) {
   var adding = getProduct(id);
-  var add = false
+  var test = false
   cart.forEach(element => {
     if (element.id == id){
-      add = true
+      test = true
       adding = element
     }
   })
-  if (!add) {
+  if (!test) {
     adding.quantity = 1;
-    cart.push(adding);  
+    cart.push(adding);
   } 
   else {
     adding.quantity += 1
@@ -83,11 +83,11 @@ function toCart(id) {
 }
 
 function addProduct(product) {
-  window.location.reload();
+  window.location.reload()
   let add = JSON.parse(localStorage.getItem("cart"));
   let adding = add.find((element) => element.id == product);
   adding.quantity += 1;
-  saveCart()
+  localStorage.setItem("cart", JSON.stringify(add));
 }
 
 function removeProduct(product) {
@@ -96,11 +96,9 @@ function removeProduct(product) {
   let removing = cart.find((element) => element.id == product);
     if (removing.quantity !== 0) {
       removing.quantity += -1;
-      saveCart()
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
   }
-
-
 
 $("#placeOrder").click(function () {
   let name = document.forms["myForm"]["name"].value;
